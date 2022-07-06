@@ -16,15 +16,3 @@ export const Button = styled.button`
  &:hover {
     box-shadow: 0 9px 47px 11px rgba(51, 51, 51, 0.18);}
 `
-export const Title = styled.h2`
-    font-size: 50px;
-    color: tomato;
-    font-weight:800; 
-`
-export const Section = styled.div`
-    text-align:center;
-    background-color:violet;
-    width:500px;
-  
-    
-`

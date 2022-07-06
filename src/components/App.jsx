@@ -1,7 +1,10 @@
 import React from "react";
-import FeedbackOptions from "./FeedbackOptions/FeedbackOptions";
-import {Section, Title} from '../components/FeedbackOptions/FeedbackOptions.styled'
+import FeedbackOptions  from "./FeedbackOptions/FeedbackOptions";
+import Section from './Section/Section'
 import Statistics from "./Statistics/Statistics"
+import Notification from "./Notification/Notification";
+import { Container } from "./Container.styled";
+
 
 export class App extends React.Component {
   state = {
@@ -9,9 +12,9 @@ export class App extends React.Component {
   neutral: 0,
   bad: 0
   }
-  hendleoptions = (option) => {
+  hendleoptions = (optionItem) => {
         this.setState(prevState=>({
-          [option]: prevState[option] + 1,
+          [optionItem]: prevState[optionItem] + 1,
         }))
   }
   
@@ -27,7 +30,10 @@ export class App extends React.Component {
 
   render() {
 
-
+    const { good, neutral, bad  } = this.state;
+    const keys = Object.keys(this.state);
+    const total = this.countTotalFeedback();
+    const positivPersantage = this.countPositiveFeedbackPercentage();
     
     return (
     <div
@@ -40,24 +46,25 @@ export class App extends React.Component {
         color: '#010101'
       }}
       >
+        <Container>
         <Section title="Please leave feedback">
-          <Title>Please leave feedback</Title>
-
-          
-          <FeedbackOptions
-            options={Object.keys(this.state)}
+         <FeedbackOptions
+            options={keys}
             onLeaveFeedback={this.hendleoptions}
           >
             </FeedbackOptions >
-        <Statistics
-              good={this.state.good}
-              neutral={this.state.neutral}
-              bad={this.state.bad}
-              total={this.countTotalFeedback()}
-              positivePercentage={this.countPositiveFeedbackPercentage()}>
-        </Statistics>
-
           </Section>
+          <Section title="Statistics">
+            {total?<Statistics
+              good={good}
+              neutral={neutral}
+              bad={bad}
+              total={total}
+              positivePercentage={positivPersantage}>
+          </Statistics>:<Notification message="There is no feedback"></Notification> }
+          </Section>
+        </Container>
+          
     </div>
   );
   }
