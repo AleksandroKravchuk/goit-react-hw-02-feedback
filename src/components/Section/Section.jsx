@@ -1,13 +1,13 @@
-import React from "react";
-import {Title, SectionWrap} from "./Section.styled"
-import PropTypes from "prop-types"
+import React from 'react';
+import { Title, SectionWrap } from './Section.styled';
+import PropTypes from 'prop-types';
 
 const Section = ({ title, children }) => (
- <SectionWrap>
+  <SectionWrap>
     <Title>{title}</Title>
-        {children}
-</SectionWrap>
-)
+    {children}
+  </SectionWrap>
+);
 
 Section.propTypes = {
   title: PropTypes.string.isRequired,
